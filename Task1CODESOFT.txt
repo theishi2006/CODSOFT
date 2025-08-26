@@ -1,0 +1,49 @@
+#include <iostream>  
+#include <cstdlib> 
+#include <ctime>
+     
+using namespace std;
+
+int main() {
+    srand(time(0));
+
+    int Number = rand() % 100 + 1;
+    
+    int Playerguess = 0;  
+    int attempts = 0;   
+
+    cout << " Welcome to THE GUESS MANIA " << endl;
+    cout << " Let's see your Guessing power. I have choosen a number between 1 to 100.Try to guess it" << endl;
+
+    while (Playerguess != Number ) {
+        cout << "Enter your guess: ";
+        cin >> Playerguess ; 
+ attempts++;  
+
+       if (Playerguess == Number){
+           cout <<" HURRAHhhh, you guessed it right.";
+       }
+       else{
+       int diff =  Playerguess - Number;
+       
+       if (diff<0){
+           diff =-diff;
+            if (diff > 30)
+                cout << "Way too low!\n";
+            else if (diff > 15)
+                cout << "Too low!\n";
+            else
+                cout << "A little low!\n";
+        } else { 
+            if (diff > 30)
+                cout << "Way too high!\n";
+            else if (diff > 15)
+                cout << "Too high!\n";
+            else
+                cout << "A little high!\n";
+        }
+
+       }
+       }
+return 0;
+}
