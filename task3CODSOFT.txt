@@ -1,0 +1,91 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+const int MAX = 100;  // max tasks allowed
+string tasks[MAX];
+bool completed[MAX];  // true if task is completed
+int count = 0;        // number of tasks
+int choice;
+cout << "Hi there! Welcome to your personal To-Do List Manager.\n";
+cout << "Let's get you organized step by step!\n";
+do {
+cout << "\n............................\n";
+cout << "          TO-DO MENU          \n";
+cout << "............................\n";
+cout << "Press 1 to Add a New Task.\n";
+cout << "Press 2 to Show All Tasks.\n";
+cout << "Press 3 to Mark Task as Done.\n";
+cout << "Press 4 to Delete a Task.\n";
+cout << "Press 5 to Exit!\n";
+cout << ".............................\n";
+cout << "What would you like to do? ";
+cin >> choice;
+if (choice == 1) {
+char more;
+do {
+if (count < MAX) {
+cout << "\nOkay! Tell me your task: ";
+cin.ignore();
+getline(cin, tasks[count]);
+completed[count] = false;
+count++;
+cout << "Task added.\n";
+} else {
+cout << "Sorry, Your task list is full.\n";
+break;
+}
+cout << "Would you like to add another one? (y/n): ";
+cin >> more;
+cin.ignore(); 
+} while (more == 'y' || more == 'Y');
+}
+else if (choice == 2) {
+if (count == 0) {
+cout << "\n Your to-do list is empty. Add something first!\n";
+} else {
+cout << "\n------- YOUR TASKS -------\n";
+for (int i = 0; i < count; i++) {
+cout << "[" << (i + 1) << "] "
+<< (completed[i] ? "[✔ Done] " : "[… Pending] ")
+<< tasks[i] << "\n";
+}
+cout << "---------------------------\n";
+}
+}
+else if (choice == 3) {
+int num;
+cout << "\nWhich task number did you complete? ";
+cin >> num;
+if (num > 0 && num <= count) {
+completed[num - 1] = true;
+cout << "Nice work! You completed: " << tasks[num - 1] << "\n";
+} else {
+cout << "Sorry, that's not a valid task number.\n";
+}
+}
+else if (choice == 4) {
+int num;
+cout << "\nWhich task number do you want to delete? ";
+cin >> num;
+if (num > 0 && num <= count) {
+cout << "Deleting: " << tasks[num - 1] << "\n";
+for (int i = num - 1; i < count - 1; i++) {
+tasks[i] = tasks[i + 1];
+completed[i] = completed[i + 1];
+}
+count--;
+cout << "Task removed. Fresh start!\n";
+} else {
+cout << "Invalid number. Try again.\n";
+}
+}
+else if (choice == 5) {
+cout << "\nGreat job !\nKeep going, one task at a time.\n";
+}
+else {
+cout << "I didn't understand that. Please pick a number from the menu.\n";
+}
+} while (choice != 5);
+return 0;
+}
